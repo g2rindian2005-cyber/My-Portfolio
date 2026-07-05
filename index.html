@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gokul Rathod | DevOps Engineer</title>
+<meta name="description" content="Gokul Rathod — Cloud DevOps Engineer specializing in AWS, Kubernetes, Docker, Terraform and CI/CD.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#0d0403;
+    --bg-1:#1a0605;
+    --red-1:#b3140f;
+    --red-2:#e6231a;
+    --red-glow:#ff4433;
+    --ink-0:#fff8f6;
+    --ink-1:#e8cfc9;
+    --ink-2:#a98a84;
+    --line:rgba(255,255,255,0.08);
+    --card:#1c0908;
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Archivo', sans-serif;
+    --body: 'Space Grotesk', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 85% -5%, #4a0d09 0%, transparent 60%),
+      radial-gradient(900px 500px at 0% 100%, #3a0705 0%, transparent 55%),
+      var(--bg-0);
+    color:var(--ink-0);
+    font-family:var(--body);
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  ::selection{background:var(--red-2); color:#fff;}
+
+  /* Scanline / grain texture */
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:999;
+    opacity:0.035; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 6vw;
+    background:linear-gradient(to bottom, rgba(13,4,3,0.85), transparent);
+    backdrop-filter:blur(2px);
+  }
+  .logo{font-family:var(--display); font-weight:800; font-size:1.15rem; letter-spacing:0.02em;}
+  .logo span{color:var(--red-glow);}
+  nav{display:flex; gap:34px; font-size:0.85rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:500;}
+  nav a{opacity:0.75; transition:opacity .2s, color .2s; position:relative;}
+  nav a:hover{opacity:1; color:var(--red-glow);}
+  .menu-btn{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .menu-btn span{width:24px; height:2px; background:var(--ink-0);}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    align-items:center;
+    padding:120px 6vw 60px;
+    position:relative;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:180px;
+    background:linear-gradient(to top, var(--bg-0), transparent);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:0.8rem; color:var(--red-glow);
+    letter-spacing:0.15em; text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:26px; height:1px; background:var(--red-glow); display:inline-block;}
+  .hero h1{
+    font-family:var(--display); font-weight:800;
+    font-size:clamp(2.6rem, 6vw, 5rem);
+    line-height:0.98; letter-spacing:-0.02em;
+    color:var(--ink-0);
+  }
+  .hero h1 .hi{
+    font-family:var(--body); font-weight:400; font-size:0.35em;
+    display:block; color:var(--ink-1); margin-bottom:6px; letter-spacing:0;
+  }
+  .hero h1 .accent-dot{color:var(--red-glow);}
+  .role-line{
+    font-family:var(--mono); font-size:1.15rem; color:var(--red-2);
+    margin-top:20px; letter-spacing:0.02em;
+    display:flex; align-items:center; gap:10px;
+  }
+  .cursor{display:inline-block; width:9px; height:1.1em; background:var(--red-glow); animation:blink 1s steps(1) infinite; vertical-align:text-bottom;}
+  @keyframes blink{50%{opacity:0;}}
+  .hero p.desc{
+    margin-top:26px; max-width:460px; color:var(--ink-2); font-size:1.02rem; line-height:1.65;
+  }
+  .hero-ctas{display:flex; gap:16px; margin-top:38px; flex-wrap:wrap;}
+  .btn{
+    padding:15px 28px; border-radius:999px; font-size:0.9rem; font-weight:600;
+    display:inline-flex; align-items:center; gap:10px; cursor:pointer; border:1px solid transparent;
+    transition:transform .25s, box-shadow .25s, background .25s;
+  }
+  .btn-solid{background:var(--ink-0); color:#20080a;}
+  .btn-solid:hover{transform:translateY(-3px); box-shadow:0 10px 30px rgba(255,255,255,0.15);}
+  .btn-ghost{border-color:rgba(255,255,255,0.3); color:var(--ink-0); background:transparent;}
+  .btn-ghost:hover{transform:translateY(-3px); border-color:var(--red-glow); box-shadow:0 10px 30px rgba(230,35,26,0.25);}
+
+  .hero-visual{position:relative; display:flex; justify-content:center; align-items:flex-end; height:100%;}
+  .photo-frame{
+    position:relative; width:min(420px, 90%); aspect-ratio:3/3.7;
+    border-radius:18px; overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.08);
+  }
+  .photo-frame img{width:100%; height:100%; object-fit:cover; filter:saturate(1.05) contrast(1.03);}
+  .photo-frame::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(179,20,15,0) 40%, rgba(20,4,3,0.65) 100%);
+  }
+  .voice-badge{
+    position:absolute; left:20px; bottom:20px; z-index:5;
+    display:flex; align-items:center; gap:12px;
+    background:rgba(13,4,3,0.55); backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,0.15); padding:10px 16px 10px 10px; border-radius:999px;
+    cursor:pointer; user-select:none;
+  }
+  .pulse-ring{
+    position:relative; width:36px; height:36px; border-radius:50%;
+    background:var(--red-2); display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .pulse-ring::before, .pulse-ring::after{
+    content:""; position:absolute; inset:-6px; border-radius:50%;
+    border:1px solid var(--red-glow); opacity:0.6;
+    animation:pulse 2.2s ease-out infinite;
+  }
+  .pulse-ring::after{animation-delay:1.1s;}
+  @keyframes pulse{0%{transform:scale(0.8); opacity:0.7;} 100%{transform:scale(1.6); opacity:0;}}
+  .pulse-ring svg{width:16px; height:16px; fill:#fff; position:relative; z-index:1;}
+  .voice-badge span{font-family:var(--mono); font-size:0.72rem; letter-spacing:0.04em; color:var(--ink-1);}
+  .voice-badge.muted .pulse-ring{background:#5b2422;}
+  .voice-badge.muted .pulse-ring::before, .voice-badge.muted .pulse-ring::after{display:none;}
+
+  .stat-chip{
+    position:absolute; top:22px; right:-14px; z-index:5;
+    background:var(--ink-0); color:#20080a; border-radius:14px;
+    padding:12px 16px; text-align:center; box-shadow:0 14px 30px rgba(0,0,0,0.4);
+  }
+  .stat-chip b{display:block; font-family:var(--display); font-size:1.5rem; font-weight:800; line-height:1;}
+  .stat-chip small{font-size:0.62rem; letter-spacing:0.06em; text-transform:uppercase; color:#6c3a35;}
+
+  .scroll-cue{
+    position:absolute; left:6vw; bottom:34px; font-family:var(--mono); font-size:0.72rem;
+    letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-2);
+    display:flex; align-items:center; gap:10px;
+  }
+  .scroll-cue .line{width:1px; height:34px; background:linear-gradient(var(--red-glow), transparent); animation:down 1.8s ease-in-out infinite;}
+  @keyframes down{0%{transform:scaleY(0); transform-origin:top;} 50%{transform:scaleY(1); transform-origin:top;} 51%{transform-origin:bottom;} 100%{transform:scaleY(0); transform-origin:bottom;}}
+
+  .socials-fixed{
+    position:absolute; right:6vw; bottom:34px; display:flex; gap:14px;
+  }
+  .socials-fixed a{
+    width:38px; height:38px; border-radius:50%; border:1px solid rgba(255,255,255,0.18);
+    display:flex; align-items:center; justify-content:center; transition:all .25s;
+  }
+  .socials-fixed a:hover{background:var(--red-2); border-color:var(--red-2); transform:translateY(-3px);}
+  .socials-fixed svg{width:16px; height:16px; fill:var(--ink-0);}
+
+  section{padding:130px 6vw;}
+  .section-head{max-width:640px; margin-bottom:64px;}
+  .kicker{font-family:var(--mono); font-size:0.78rem; color:var(--red-glow); text-transform:uppercase; letter-spacing:0.15em; margin-bottom:14px; display:block;}
+  .section-head h2{font-family:var(--display); font-weight:800; font-size:clamp(2rem,3.6vw,3rem); letter-spacing:-0.01em;}
+  .section-head p{color:var(--ink-2); margin-top:16px; line-height:1.7; font-size:1.02rem;}
+
+  /* ABOUT */
+  #about{background:var(--bg-1); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:70px; align-items:start;}
+  .about-copy p{color:var(--ink-1); line-height:1.85; font-size:1.05rem; margin-bottom:20px;}
+  .fact-list{display:grid; grid-template-columns:1fr 1fr; gap:22px 30px; margin-top:34px;}
+  .fact{border-left:2px solid var(--red-2); padding-left:16px;}
+  .fact b{display:block; font-family:var(--mono); font-size:0.7rem; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;}
+  .fact span{font-size:0.98rem; color:var(--ink-0);}
+
+  .skill-groups{display:flex; flex-direction:column; gap:26px;}
+  .skill-row{
+    display:grid; grid-template-columns:150px 1fr; gap:20px; align-items:start;
+    padding-bottom:22px; border-bottom:1px solid var(--line);
+  }
+  .skill-row .label{font-family:var(--mono); font-size:0.75rem; color:var(--red-glow); text-transform:uppercase; letter-spacing:0.06em; padding-top:6px;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .tag{
+    padding:8px 14px; border:1px solid var(--line); border-radius:8px; font-size:0.85rem;
+    color:var(--ink-1); background:rgba(255,255,255,0.02); transition:all .2s;
+  }
+  .tag:hover{border-color:var(--red-glow); color:#fff; background:rgba(230,35,26,0.08);}
+
+  /* PROJECTS */
+  .project-list{display:flex; flex-direction:column;}
+  .project{
+    display:grid; grid-template-columns:70px 1fr 220px; gap:30px;
+    padding:38px 0; border-top:1px solid var(--line); align-items:start;
+    transition:background .25s;
+  }
+  .project:last-child{border-bottom:1px solid var(--line);}
+  .project:hover{background:rgba(230,35,26,0.04);}
+  .p-index{font-family:var(--mono); color:var(--ink-2); font-size:0.9rem; padding-top:4px;}
+  .p-body h3{font-family:var(--display); font-weight:700; font-size:1.4rem; margin-bottom:10px;}
+  .p-body ul{color:var(--ink-2); font-size:0.95rem; line-height:1.7; padding-left:18px;}
+  .p-body ul li{margin-bottom:4px;}
+  .p-meta{display:flex; flex-direction:column; align-items:flex-start; gap:12px; padding-top:6px;}
+  .p-date{font-family:var(--mono); font-size:0.75rem; color:var(--ink-2);}
+  .p-stack{display:flex; flex-wrap:wrap; gap:6px;}
+  .p-stack span{font-size:0.7rem; padding:4px 9px; border:1px solid var(--line); border-radius:6px; color:var(--ink-1);}
+  .p-link{font-family:var(--mono); font-size:0.78rem; color:var(--red-glow); display:inline-flex; align-items:center; gap:6px; margin-top:4px;}
+  .p-link:hover{text-decoration:underline;}
+
+  /* TIMELINE / EDUCATION */
+  #education{background:var(--bg-1); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .timeline{position:relative; padding-left:40px; border-left:1px solid var(--line);}
+  .t-item{position:relative; padding-bottom:46px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-dot{position:absolute; left:-45px; top:2px; width:10px; height:10px; border-radius:50%; background:var(--red-2); box-shadow:0 0 0 4px rgba(230,35,26,0.15);}
+  .t-date{font-family:var(--mono); font-size:0.75rem; color:var(--red-glow); text-transform:uppercase; letter-spacing:0.06em;}
+  .t-item h3{font-family:var(--display); font-size:1.2rem; font-weight:700; margin:8px 0 4px;}
+  .t-item p{color:var(--ink-2); font-size:0.92rem;}
+
+  /* CONTACT */
+  .contact-wrap{
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+  }
+  .contact-big{font-family:var(--display); font-weight:800; font-size:clamp(2.2rem,5vw,4rem); line-height:1.05; letter-spacing:-0.01em;}
+  .contact-big .accent{color:var(--red-glow);}
+  .contact-links{display:flex; flex-direction:column; gap:18px; margin-top:20px;}
+  .contact-links a{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 24px; border:1px solid var(--line); border-radius:14px;
+    font-size:1rem; transition:all .25s;
+  }
+  .contact-links a:hover{border-color:var(--red-glow); background:rgba(230,35,26,0.06); transform:translateX(6px);}
+  .contact-links .lbl{display:flex; flex-direction:column;}
+  .contact-links .lbl small{font-family:var(--mono); color:var(--ink-2); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;}
+  .arrow{color:var(--red-glow); font-size:1.2rem;}
+
+  footer{
+    padding:34px 6vw; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); flex-wrap:wrap; gap:12px;
+  }
+
+  @media (max-width:920px){
+    nav{display:none;}
+    .menu-btn{display:flex;}
+    .hero{grid-template-columns:1fr; padding-top:140px;}
+    .hero-visual{order:-1; margin-bottom:40px;}
+    .stat-chip{right:6px;}
+    .about-grid, .contact-wrap{grid-template-columns:1fr;}
+    .project{grid-template-columns:1fr; gap:14px;}
+    .p-meta{flex-direction:row; flex-wrap:wrap;}
+    .socials-fixed, .scroll-cue{position:static; margin-top:40px;}
+    section{padding:90px 6vw;}
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header>
+  <div class="logo">Gokul Rathod<span>.</span></div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="menu-btn" aria-label="menu"><span></span><span></span><span></span></button>
+</header>
+
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow">Available for fresher devops roles</div>
+    <h1><span class="hi">Hi, I'm</span>Gokul<br>Rathod<span class="accent-dot">.</span></h1>
+    <div class="role-line">DevOps Engineer <span class="cursor"></span></div>
+    <p class="desc">I build fast, scalable and modern cloud infrastructure using AWS, Docker, Kubernetes, Terraform and CI/CD — turning manual deployments into automated, reliable pipelines.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-solid">View My Work →</a>
+      <a href="#contact" class="btn btn-ghost">Contact Me</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="stat-chip"><b>3+</b><small>Cloud Projects</small></div>
+    <div class="photo-frame">
+      <img src="assets/gokul.jpeg" alt="Gokul Rathod">
+      <div class="voice-badge" id="voiceBadge">
+        <div class="pulse-ring">
+          <svg viewBox="0 0 24 24" id="voiceIcon"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a1 1 0 00-2 0 3 3 0 01-6 0 1 1 0 00-2 0 5 5 0 004 4.9V18H9a1 1 0 000 2h6a1 1 0 000-2h-2v-2.1A5 5 0 0017 11z"/></svg>
+        </div>
+        <span id="voiceLabel">Mute Voice Intro</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">Scroll<div class="line"></div></div>
+  <div class="socials-fixed">
+    <a href="https://linkedin.com/in/gokul-rathod-3325072b9" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M4.98 3.5A2.5 2.5 0 112.5 6 2.5 2.5 0 014.98 3.5zM2.98 8.5h4v13h-4zM9.5 8.5h3.83v1.78h.05c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.78 2.65 4.78 6.1v7.18h-4v-6.37c0-1.52-.03-3.47-2.11-3.47-2.12 0-2.44 1.66-2.44 3.36v6.48h-4z"/></svg>
+    </a>
+    <a href="https://github.com/g2rindian2005-cyber" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.4 9.4 0 015 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.35 4.68-4.58 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg>
+    </a>
+    <a href="mailto:g2rindian2005@gmail.com" aria-label="Email">
+      <svg viewBox="0 0 24 24"><path d="M2 5.5A1.5 1.5 0 013.5 4h17A1.5 1.5 0 0122 5.5v13a1.5 1.5 0 01-1.5 1.5h-17A1.5 1.5 0 012 18.5zm2.2.5L12 11.2 19.8 6zM20 8.1l-7.4 4.9a1 1 0 01-1.1 0L4 8.1V18h16z"/></svg>
+    </a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <span class="kicker">Who I am</span>
+      <h2 style="font-family:var(--display); font-weight:800; font-size:clamp(1.9rem,3vw,2.6rem); margin-bottom:24px;">Cloud &amp; DevOps, from the ground up.</h2>
+      <div class="fact-list">
+        <div class="fact"><b>Location</b><span>Hyderabad, India</span></div>
+        <div class="fact"><b>Focus</b><span>AWS · Kubernetes · IaC</span></div>
+        <div class="fact"><b>Education</b><span>BCA, 2026</span></div>
+        <div class="fact"><b>Status</b><span>Open to work</span></div>
+      </div>
+    </div>
+    <div class="about-copy">
+      <p>I'm a Cloud DevOps Engineer with hands-on experience across AWS, Kubernetes, Docker, Terraform, GitHub Actions, Jenkins, ArgoCD and Helm. I design and deploy cloud-native applications, build automated CI/CD pipelines, and manage Infrastructure as Code for environments that need to stay reliable at scale.</p>
+      <p>My work spans container orchestration on AWS EKS, GitOps-based delivery, Linux administration, and monitoring stacks built on CloudWatch, Prometheus and Grafana. I care about automation that removes manual steps and makes releases boring — in the best way.</p>
+      <p>Outside of production work, I build real infrastructure projects end-to-end — from provisioning VPCs in Terraform to shipping microservices on EKS with Helm — to keep sharpening the same skills I bring to a team.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-head">
+    <span class="kicker">Toolbox</span>
+    <h2>Technical skills</h2>
+    <p>The stack I use to design, ship and operate cloud infrastructure end-to-end.</p>
+  </div>
+  <div class="skill-groups">
+    <div class="skill-row">
+      <div class="label">Cloud</div>
+      <div class="tag-row">
+        <span class="tag">AWS EC2</span><span class="tag">S3</span><span class="tag">RDS</span><span class="tag">IAM</span><span class="tag">VPC</span><span class="tag">CloudWatch</span><span class="tag">CloudFormation</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="label">Containers</div>
+      <div class="tag-row">
+        <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">AWS EKS</span><span class="tag">Helm</span><span class="tag">ArgoCD</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="label">CI / CD</div>
+      <div class="tag-row">
+        <span class="tag">Jenkins</span><span class="tag">GitHub Actions</span><span class="tag">GitOps</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="label">IaC</div>
+      <div class="tag-row">
+        <span class="tag">Terraform</span><span class="tag">AWS CloudFormation</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="label">Monitoring</div>
+      <div class="tag-row">
+        <span class="tag">CloudWatch</span><span class="tag">Prometheus</span><span class="tag">Grafana</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="label">Systems</div>
+      <div class="tag-row">
+        <span class="tag">Linux Administration</span><span class="tag">Networking</span><span class="tag">Process Management</span><span class="tag">Shell Scripting</span><span class="tag">Git / GitHub</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-head">
+    <span class="kicker">Selected work</span>
+    <h2>Projects</h2>
+    <p>Infrastructure and applications I've architected, deployed and automated.</p>
+  </div>
+  <div class="project-list">
+    <div class="project">
+      <div class="p-index">01</div>
+      <div class="p-body">
+        <h3>E-Commerce Microservices Application</h3>
+        <ul>
+          <li>Architected and deployed a production-grade microservices app on Kubernetes (AWS EKS) with Deployments, Services and Ingress, managing 5+ independent services with zero-downtime rollouts.</li>
+          <li>Built end-to-end CI/CD pipelines with GitHub Actions, cutting release cycle time by ~60%.</li>
+          <li>Managed deployments with Helm charts across dev, staging and production.</li>
+          <li>Automated deployment workflows, reducing manual effort by 70%.</li>
+        </ul>
+      </div>
+      <div class="p-meta">
+        <div class="p-date">May 2026</div>
+        <div class="p-stack"><span>Docker</span><span>Kubernetes</span><span>EKS</span><span>ArgoCD</span><span>Helm</span><span>RDS</span></div>
+        <a class="p-link" href="https://github.com/g2rindian2005-cyber" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="p-index">02</div>
+      <div class="p-body">
+        <h3>AWS Infrastructure with Terraform</h3>
+        <ul>
+          <li>Designed and provisioned a highly available AWS environment with a multi-AZ VPC across 2 public and 2 private subnets, an Internet Gateway and a NAT Gateway.</li>
+          <li>Deployed an Application Load Balancer with a target-tracking Auto Scaling Group across multiple availability zones.</li>
+          <li>Provisioned a private RDS MySQL instance with least-privilege security groups, isolated from direct internet exposure.</li>
+        </ul>
+      </div>
+      <div class="p-meta">
+        <div class="p-date">July 2026</div>
+        <div class="p-stack"><span>Terraform</span><span>VPC</span><span>EC2</span><span>RDS</span><span>ALB</span><span>Auto Scaling</span></div>
+        <a class="p-link" href="https://github.com/g2rindian2005-cyber" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="p-index">03</div>
+      <div class="p-body">
+        <h3>AWS E-Commerce OTP Authentication System</h3>
+        <ul>
+          <li>Built a full-stack e-commerce web app with OTP authentication using Flask and AWS services.</li>
+          <li>Configured an Nginx reverse proxy and deployed the app on AWS EC2.</li>
+          <li>Integrated AWS RDS and implemented systemd services, achieving 99%+ uptime.</li>
+        </ul>
+      </div>
+      <div class="p-meta">
+        <div class="p-date">May 2026</div>
+        <div class="p-stack"><span>Python</span><span>Flask</span><span>EC2</span><span>RDS</span><span>Nginx</span></div>
+        <a class="p-link" href="https://github.com/g2rindian2005-cyber" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-head">
+    <span class="kicker">Background</span>
+    <h2>Education &amp; certifications</h2>
+  </div>
+  <div class="timeline">
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <div class="t-date">June 2026</div>
+      <h3>Bachelor of Computer Application (BCA) — 68.7%</h3>
+      <p>Dr. Ambedkar Marathwada University, Jalna, Maharashtra</p>
+    </div>
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <div class="t-date">Feb 2023</div>
+      <h3>Higher Secondary Certificate — 56.17%</h3>
+      <p>Maharashtra State Board of Secondary &amp; Higher Secondary Education, Pune</p>
+    </div>
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <div class="t-date">April 2021</div>
+      <h3>Secondary School Certificate — 85.80%</h3>
+      <p>Maharashtra State Board of Secondary &amp; Higher Secondary Education, Pune</p>
+    </div>
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <div class="t-date">Certification</div>
+      <h3>HackFest</h3>
+      <p>Certification of participation / achievement</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-wrap">
+    <div>
+      <span class="kicker">Get in touch</span>
+      <div class="contact-big">Let's build reliable <span class="accent">infrastructure</span> together.</div>
+      <p style="color:var(--ink-2); margin-top:20px; max-width:420px; line-height:1.7;">Open to fresher DevOps roles — remote or on-site across India. Reach out for opportunities or collaboration.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:g2rindian2005@gmail.com">
+        <div class="lbl"><small>Email</small>g2rindian2005@gmail.com</div>
+        <span class="arrow">↗</span>
+      </a>
+      <a href="tel:+919356782322">
+        <div class="lbl"><small>Phone</small>+91 93567 82322</div>
+        <span class="arrow">↗</span>
+      </a>
+      <a href="https://linkedin.com/in/gokul-rathod-3325072b9" target="_blank" rel="noopener">
+        <div class="lbl"><small>LinkedIn</small>gokul-rathod-3325072b9</div>
+        <span class="arrow">↗</span>
+      </a>
+      <a href="https://github.com/g2rindian2005-cyber" target="_blank" rel="noopener">
+        <div class="lbl"><small>GitHub</small>g2rindian2005-cyber</div>
+        <span class="arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Gokul Rathod. Built with HTML, CSS &amp; JS.</span>
+  <span>Hyderabad, India</span>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const menuBtn = document.querySelector('.menu-btn');
+  const nav = document.querySelector('nav');
+  menuBtn.addEventListener('click', () => {
+    if(nav.style.display === 'flex'){ nav.style.display = 'none'; }
+    else {
+      nav.style.display = 'flex';
+      nav.style.position='fixed'; nav.style.top='72px'; nav.style.right='6vw';
+      nav.style.flexDirection='column'; nav.style.background='#1a0605';
+      nav.style.padding='20px 26px'; nav.style.borderRadius='14px';
+      nav.style.border='1px solid rgba(255,255,255,0.08)';
+    }
+  });
+
+  // AI Voice Intro using Web Speech API (free, no API key, runs fully in-browser)
+  const introText = "Hi, I'm Gokul Rathod, a DevOps engineer specializing in A W S, Kubernetes, Docker, Terraform and C I C D. Welcome to my portfolio.";
+  const voiceBadge = document.getElementById('voiceBadge');
+  const voiceLabel = document.getElementById('voiceLabel');
+  let hasSpoken = false;
+  let muted = false;
+  let utterance = null;
+
+  function pickVoice(){
+    const voices = window.speechSynthesis.getVoices();
+    return voices.find(v => /en-IN|en-GB|en-US/.test(v.lang) && /male|Ravi|Daniel|David/i.test(v.name))
+        || voices.find(v => /en-IN/.test(v.lang))
+        || voices.find(v => /en/.test(v.lang))
+        || voices[0];
+  }
+
+  function speakIntro(){
+    if(!('speechSynthesis' in window) || muted) return;
+    window.speechSynthesis.cancel();
+    utterance = new SpeechSynthesisUtterance(introText);
+    utterance.rate = 0.98;
+    utterance.pitch = 1;
+    const v = pickVoice();
+    if(v) utterance.voice = v;
+    window.speechSynthesis.speak(utterance);
+    hasSpoken = true;
+  }
+
+  window.speechSynthesis?.addEventListener?.('voiceschanged', () => {});
+
+  // Autoplay policies block audio before interaction — speak on first user gesture
+  function firstGesture(){
+    if(!hasSpoken) speakIntro();
+    document.removeEventListener('click', firstGesture);
+    document.removeEventListener('scroll', firstGesture);
+  }
+  document.addEventListener('click', firstGesture, { once:true });
+  document.addEventListener('scroll', firstGesture, { once:true });
+
+  voiceBadge.addEventListener('click', (e) => {
+    e.stopPropagation();
+    muted = !muted;
+    voiceBadge.classList.toggle('muted', muted);
+    voiceLabel.textContent = muted ? 'Voice Muted' : 'Mute Voice Intro';
+    if(muted){ window.speechSynthesis.cancel(); }
+    else { speakIntro(); }
+  });
+</script>
+
+</body>
+</html>
